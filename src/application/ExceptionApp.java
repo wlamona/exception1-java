@@ -35,22 +35,19 @@ public class ExceptionApp {
 			System.out.print("Check-out date (dd/MM/yyyy): ");
 			checkOut = sdf.parse(sc.next());
 			
-			// forma ruim de obrigar a escoler uma data futura
-			Date now = new Date();
-			if (checkIn.before(now) || checkOut.before(now)) {
-				System.out.println("Error in reservation: Check-out date must beafter check-in date");
+// forma ruim de obrigar a escoler uma data futura por estar no programa principal
+			
+							
+			String error = reservation.updateDates(checkIn, checkOut); //método responsável para atualizar as datas
+			if (error != null) {
+				System.out.println("Error in reservation: " + error);
 			}
-			else if (!checkOut.after(checkIn)) {
-				System.out.println("Error in reservation: Check-out date must be after check-in date");
-			}
-			else {					
-			reservation.updateDates(checkIn, checkOut); //método responsável para atualizar as datas
-			System.out.println("Reservation: " + reservation);
-			}
-		}		
-		
+			else {
+				System.out.println("Reservation: " + reservation);
+			}	
+		}
 		sc.close();
-
 	}
-
 }
+
+
